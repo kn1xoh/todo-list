@@ -59,6 +59,26 @@ const notes = [
     title: 'Заметка #3',
     completed: false,
   },
+  {
+    title: 'Заметка #4',
+    completed: false,
+  },
+  {
+    title: 'Заметка #5',
+    completed: false,
+  },
+  {
+    title: 'Заметка #6',
+    completed: false,
+  },
+  {
+    title: 'Заметка #7',
+    completed: false,
+  },
+  {
+    title: 'Заметка #8',
+    completed: false,
+  },
 ]
 function render() {
   notesList.innerHTML = ''
@@ -74,12 +94,23 @@ function toHTML(note, i) {
     <li>
       <div class="checkbox ${note.completed ? 'checkbox--active' : ''}" data-value="${i}"></div>
       <div class="note-title ${note.completed ? 'note-title--complete' : ''}" data-type="complete">${note.title}</div>
-      <button class="editBtn">
+      <button class="edit-btn">
         <img src="icons/edit.svg" width="21px" height="21px" alt="редактировать">
       </button>
-      <button class="deleteBtn">
+      <button class="delete-btn">
         <img src="icons/delete.svg" width="25px" height="25px" alt="удалить">
       </button>
     </li>
   `
 }
+
+function modalAdd() {
+  const dialogModal = document.querySelector('#dialog-modal')
+  const addBtn = document.querySelector('.add-btn')
+  const closeBtn = document.querySelector('#close-btn')
+
+  addBtn.onclick = () => dialogModal.showModal()
+  closeBtn.onclick = () => dialogModal.close()
+}
+
+modalAdd()

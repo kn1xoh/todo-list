@@ -10,48 +10,61 @@
   <script defer src="app.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="app-todo">
-      <h1>Твой список дел &#128220;</h1>
+  <div class="app-todo">
+    <h1>Твой список дел &#128220;</h1>
 
-      <div class="direction-wrap">
-        <div class="search-wrap">
-          <input class="search-input" type="text" placeholder="Поиск заметки...">
-          <button class="search-btn" type="button">
-            <img src="icons/search.svg" alt="поиск">
-          </button>
-        </div>
-
-        <div class="filter">
-          <div class="filter-label" data-value="all">
-            <span>Все</span>
-            <img src="icons/arrow.svg" width="13px" height="9px" alt="" aria-hidden="true">
-          </div>
-          <ul class="filter-list">
-            <li class="filter-item" data-value="all">Все</li>
-            <li class="filter-item" data-value="complete">Завершенные</li>
-            <li class="filter-item" data-value="incomplete">Незавершенные</li>
-          </ul>
-        </div>
-
-        <button class="theme" type="button" aria-hidden="true">
-          <img src="icons/theme-white.svg" alt="">
+    <div class="direction-wrap">
+      <div class="search-wrap">
+        <input class="search-input" type="text" placeholder="Поиск заметки...">
+        <button class="search-btn" type="button">
+          <img src="icons/search.svg" alt="поиск">
         </button>
       </div>
 
-      <ul class="notes-list">
-<!--         <li>
+      <div class="filter">
+        <div class="filter-label" data-value="all">
+          <span>Все</span>
+          <img src="icons/arrow.svg" width="13px" height="9px" alt="" aria-hidden="true">
+        </div>
+        <ul class="filter-list">
+          <li class="filter-item" data-value="all">Все</li>
+          <li class="filter-item" data-value="complete">Завершенные</li>
+          <li class="filter-item" data-value="incomplete">Незавершенные</li>
+        </ul>
+      </div>
+
+      <button class="theme" type="button" aria-hidden="true">
+        <img src="icons/theme-white.svg" alt="">
+      </button>
+    </div>
+
+    <ul class="notes-list">
+      <!-- <li>
           <div class="checkbox checkbox--active" data-type="active"></div>
           <div class="note-title" data-type="complete">Заметка #1</div>
-          <button class="editBtn">
+          <button class="edit-btn">
             <img src="icons/edit.svg" width="21px" height="21px" alt="редактировать">
           </button>
-          <button class="deleteBtn">
+          <button class="delete-btn">
             <img src="icons/delete.svg" width="25px" height="25px" alt="удалить">
           </button>
         </li> -->
-      </ul>
-    </div>
+    </ul>
+
+    <button class="add-btn">
+      <img src="icons/add.svg" alt="добавить заметку">
+    </button>
   </div>
+
+  <dialog id="dialog-modal">
+    <div class="modal-wrap">
+      <h2>Новая заметка</h2>
+      <input id="input-add" type="text" placeholder="Написать заметку...">
+      <div class="btns-wrap">
+        <button class="modal-btn" id="close-btn">Отмена</button>
+        <button class="modal-btn" id="apply-btn">Принять</button>
+      </div>
+    </div>
+  </dialog>
 </body>
 </html>
