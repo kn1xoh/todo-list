@@ -103,6 +103,7 @@ body {
   visibility: hidden;
   opacity: 0;
   transition: visibility 0.3s ease, opacity 0.3s ease;
+  z-index: 10;
 }
 .filter-list--active {
   visibility: visible;
@@ -134,9 +135,9 @@ body {
 }
 .notes-list {
   width: 540px;
-  height: 440px;
+  height: 447px;
   margin: 0 auto;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-color: var(--purple) #3d3d3d;
 }
 .notes-list li {
@@ -164,10 +165,11 @@ body {
   background-position: center 35%;
 }
 .note-title {
-  width: 410px;
+  max-width: 410px;
   font-weight: 500;
   font-size: 20px;
   color: var(--white);
+  word-break: break-word;
 }
 .note-title--complete {
   text-decoration: line-through;
@@ -180,10 +182,24 @@ body {
   margin-left: auto;
   margin-right: 10px;
 }
+.edit-btn svg {
+  pointer-events: none;
+}
+.edit-btn:hover path {
+  stroke: var(--purple);
+  transition: stroke 0.2s ease;
+}
 .delete-btn {
   background-color: transparent;
   border: none;
   cursor: pointer;
+}
+.delete-btn svg {
+  pointer-events: none;
+}
+.delete-btn:hover path {
+  stroke: #e50000;
+  transition: stroke 0.2s ease;
 }
 .add-btn {
   display: flex;
@@ -254,4 +270,19 @@ body {
   line-height: 100%;
   color: var(--purple);
   cursor: pointer;
+}
+.modal-btn:hover {
+  background-color: var(--purple);
+  color: var(--white);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.empty-item {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.empty-text {
+  font-size: 20px;
+  line-height: 100%;
+  color: var(--white);
 }
