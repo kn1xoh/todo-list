@@ -70,13 +70,24 @@
     </button>
   </div>
 
-  <dialog id="dialog-modal">
+  <dialog class="dialog-modal" id="modal-add">
     <div class="modal-wrap">
       <h2>Новая заметка</h2>
-      <input id="input-add" type="text" placeholder="Написать заметку...">
+      <input class="input-modal" id="input-add" type="text" placeholder="Написать заметку...">
       <div class="btns-wrap">
         <button class="modal-btn" id="close-btn">Отмена</button>
         <button class="modal-btn" id="apply-btn">Принять</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="dialog-modal" id="modal-edit">
+    <div class="modal-wrap">
+      <h2>Редактирование</h2>
+      <input class="input-modal" id="input-edit" type="text" placeholder="Изменить заметку...">
+      <div class="btns-wrap">
+        <button class="modal-btn" id="close-btn-edit">Отмена</button>
+        <button class="modal-btn" id="apply-btn-edit">Принять</button>
       </div>
     </div>
   </dialog>

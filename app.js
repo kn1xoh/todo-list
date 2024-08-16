@@ -1,8 +1,24 @@
-const notesList = document.querySelector('.notes-list')
+const notes = [
+  {
+    title: 'Заметка #1',
+    completed: true,
+  },
+  {
+    title: 'Заметка #2',
+    completed: false,
+  },
+  {
+    title: 'Заметка #3',
+    completed: false,
+  },
+]
 
+let currentIndex
+let currentArray = notes
+
+const notesList = document.querySelector('.notes-list')
 const filterLabel = document.querySelector('.filter-label')
 const filterList = document.querySelector('.filter-list')
-
 const inputSearch = document.querySelector('.search-input')
 
 function filterNotes() {
@@ -20,21 +36,22 @@ function filterNotes() {
           filterLabel.firstElementChild.textContent = 'Все'
           render(notes)
           noNotes('У вас нет заметок')
+          currentArray = notes
           break
         case 'complete':
           filterLabel.firstElementChild.textContent = 'Завершенные'
           const completedNotes = notes.filter((note) => note.completed === true)
           render(completedNotes)
           noNotes('Нет завершенных дел :`(')
+          currentArray = completedNotes
           break
         case 'incomplete':
           filterLabel.firstElementChild.textContent = 'Незавершенные'
           const incompletedNotes = notes.filter((note) => note.completed === false)
           render(incompletedNotes)
           noNotes('Все дела сделаны ; )')
+          currentArray = incompletedNotes
           break
-        default:
-          filterLabel.firstElementChild.textContent = 'Все'
       }
       filterList.classList.remove('filter-list--active')
     }
@@ -45,7 +62,7 @@ filterNotes()
 function searchNote() {
   inputSearch.addEventListener('input', (event) => {
     const value = event.target.value.toLowerCase()
-    const findedNotes = notes.filter((note) => note.title.toLowerCase().includes(value))
+    const findedNotes = currentArray.filter((note) => note.title.toLowerCase().includes(value))
     render(findedNotes)
     noNotes('Такой заметки нет!')
   })
@@ -69,6 +86,11 @@ function interactionWithNote() {
       render(notes)
     }
     noNotes('У вас нет заметок')
+    // Редактирование заметки
+    if (target.classList.contains('edit-btn')) {
+      modalEdit.showModal()
+      currentIndex = +target.dataset.value
+    }
   })
 }
 interactionWithNote()
@@ -83,21 +105,6 @@ function noNotes(message) {
     `
   }
 }
-
-const notes = [
-  {
-    title: 'Заметка #1',
-    completed: true,
-  },
-  {
-    title: 'Заметка #2',
-    completed: false,
-  },
-  {
-    title: 'Заметка #3',
-    completed: false,
-  },
-]
 
 function render(notesArray) {
   notesList.innerHTML = ''
@@ -130,17 +137,17 @@ function toHTML(note, index) {
   `
 }
 
-const dialogModal = document.querySelector('#dialog-modal')
+const modalAdd = document.querySelector('#modal-add')
 const addBtn = document.querySelector('.add-btn')
 const closeBtn = document.querySelector('#close-btn')
 const applyBtn = document.querySelector('#apply-btn')
 const inputAdd = document.querySelector('#input-add')
 
-function modalAdd() {
-  addBtn.onclick = () => dialogModal.showModal()
-  closeBtn.onclick = () => dialogModal.close()
+function showModalAdd() {
+  addBtn.onclick = () => modalAdd.showModal()
+  closeBtn.onclick = () => modalAdd.close()
 }
-modalAdd()
+showModalAdd()
 
 function addNewNote() {
   applyBtn.addEventListener('click', () => {
@@ -154,8 +161,32 @@ function addNewNote() {
       notes.unshift(newNote)
       render(notes)
       inputAdd.value = ''
-      dialogModal.close()
+      modalAdd.close()
     }
   })
 }
 addNewNote()
+
+const modalEdit = document.querySelector('#modal-edit')
+const closeBtnEdit = document.querySelector('#close-btn-edit')
+const applyBtnEdit = document.querySelector('#apply-btn-edit')
+const inputEdit = document.querySelector('#input-edit')
+
+function showModalEdit() {
+  closeBtnEdit.onclick = () => modalEdit.close()
+}
+showModalEdit()
+
+function editNote() {
+  applyBtnEdit.addEventListener('click', () => {
+    if (inputEdit.value === '') {
+      return
+    } else {
+      notes[currentIndex].title = inputEdit.value
+      render(notes)
+      inputEdit.value = ''
+      modalEdit.close()
+    }
+  })
+}
+editNote()
