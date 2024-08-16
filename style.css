@@ -11,6 +11,7 @@
 }
 body {
   background-color: var(--black);
+  min-width: 300px;
 }
 .app-todo {
   position: relative;
@@ -37,7 +38,7 @@ body {
   border: 1px solid var(--white);
   border-radius: 5px;
   padding: 8px 50px 8px 16px;
-  width: 595px;
+  width: 100%;
   height: 38px;
   background-color: transparent;
   font-weight: 500;
@@ -57,6 +58,10 @@ body {
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+.filter-theme-wrap {
+  display: flex;
+  gap: 16px;
 }
 .filter {
   position: relative;
@@ -143,7 +148,7 @@ body {
 .notes-list li {
   display: flex;
   align-items: center;
-  width: 520px;
+  width: 100%;
   padding: 17px 0;
 }
 .notes-list li:not(:last-child) {
@@ -221,8 +226,10 @@ body {
 }
 #dialog-modal {
   position: fixed;
-  top: 15%;
-  left: 37%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -100%);
   border: 1px solid var(--white);
   border-radius: 16px;
   background-color: var(--black);
@@ -289,4 +296,70 @@ body {
   font-size: 20px;
   line-height: 100%;
   color: var(--white);
+}
+
+@media screen and (max-width: 900px) {
+  .app-todo {
+    width: 430px;
+    padding: 40px 15px 0;
+  }
+  .app-todo h1 {
+    font-size: 28px;
+  }
+  .direction-wrap {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .search-wrap {
+    width: 400px;
+  }
+  .notes-list {
+    width: 400px;
+    height: 319px;
+  }
+  .note-title {
+    font-size: 18px;
+  }
+  #dialog-modal {
+    transform: translate(-50%, -50%);
+  }
+  .modal-wrap {
+    width: 280px;
+    height: 180px;
+    padding: 15px;
+  }
+  .modal-wrap h2 {
+    font-size: 20px;
+  }
+  #input-add {
+    width: 250px;
+  }
+  #close-btn {
+    font-size: 16px;
+  }
+  #apply-btn {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 470px) {
+  .app-todo {
+    width: 300px;
+    padding: 40px 10px 0;
+  }
+  .app-todo h1 {
+    font-size: 24px;
+  }
+  .search-wrap {
+    width: 280px;
+  }
+  .filter-label {
+    font-size: 16px;
+  }
+  .notes-list {
+    width: 280px;
+  }
+  .note-title {
+    font-size: 16px;
+  }
 }
