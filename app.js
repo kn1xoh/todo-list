@@ -3,6 +3,8 @@ const notesList = document.querySelector('.notes-list')
 const filterLabel = document.querySelector('.filter-label')
 const filterList = document.querySelector('.filter-list')
 
+const inputSearch = document.querySelector('.search-input')
+
 function filterNotes() {
   // Отработка селекта
   filterLabel.addEventListener('click', () => {
@@ -36,18 +38,19 @@ function filterNotes() {
       }
       filterList.classList.remove('filter-list--active')
     }
-
-    // Фильтр заметок
-    // if (filterLabel.dataset.type === 'complete') {
-    //   console.log(1)
-    // }
   })
 }
 filterNotes()
 
-// function searchNote() {
-
-// }
+function searchNote() {
+  inputSearch.addEventListener('input', (event) => {
+    const value = event.target.value.toLowerCase()
+    const findedNotes = notes.filter((note) => note.title.toLowerCase().includes(value))
+    render(findedNotes)
+    noNotes('Такой заметки нет!')
+  })
+}
+searchNote()
 
 function interactionWithNote() {
   notesList.addEventListener('click', (event) => {
