@@ -145,7 +145,10 @@ const inputAdd = document.querySelector('#input-add')
 
 function showModalAdd() {
   addBtn.onclick = () => modalAdd.showModal()
-  closeBtn.onclick = () => modalAdd.close()
+  closeBtn.onclick = () => {
+    modalAdd.close()
+    inputAdd.value = ''
+  }
 }
 showModalAdd()
 
@@ -173,7 +176,10 @@ const applyBtnEdit = document.querySelector('#apply-btn-edit')
 const inputEdit = document.querySelector('#input-edit')
 
 function showModalEdit() {
-  closeBtnEdit.onclick = () => modalEdit.close()
+  closeBtnEdit.onclick = () => {
+    modalEdit.close()
+    inputEdit.value = ''
+  }
 }
 showModalEdit()
 
@@ -190,3 +196,11 @@ function editNote() {
   })
 }
 editNote()
+
+function changeTheme() {
+  const themeBtn = document.querySelector('.theme')
+  const body = document.querySelector('body')
+
+  themeBtn.onclick = () => body.classList.toggle('theme-light')
+}
+changeTheme()

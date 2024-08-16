@@ -10,8 +10,9 @@
   font-family: 'Inter', sans-serif;
 }
 body {
-  background-color: var(--black);
   min-width: 300px;
+  background-color: var(--black);
+  color: var(--white);
 }
 .app-todo {
   position: relative;
@@ -23,7 +24,6 @@ body {
 }
 .app-todo h1 {
   text-align: center;
-  color: var(--white);
   margin-bottom: 20px;
 }
 .direction-wrap {
@@ -45,7 +45,14 @@ body {
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
-  color: var(--white);
+  color: inherit;
+}
+.search-input:focus {
+  outline: 1px solid var(--purple);
+  border: none;
+}
+body.theme-light .search-input {
+  border: 1px solid var(--purple);
 }
 .search-input::placeholder {
   color: #666;
@@ -59,6 +66,9 @@ body {
   border: none;
   background-color: transparent;
   cursor: pointer;
+}
+body.theme-light .search-btn svg path {
+  fill: var(--purple);
 }
 .filter-theme-wrap {
   display: flex;
@@ -174,12 +184,14 @@ body {
   max-width: 410px;
   font-weight: 500;
   font-size: 20px;
-  color: var(--white);
   word-break: break-word;
 }
 .note-title--complete {
   text-decoration: line-through;
   color: rgba(255, 255, 255, 0.5);
+}
+body.theme-light .note-title--complete {
+  color: rgba(37, 37, 37, 0.5);
 }
 .edit-btn {
   background-color: transparent;
@@ -234,6 +246,11 @@ body {
   border: 1px solid var(--white);
   border-radius: 16px;
   background-color: var(--black);
+  color: var(--white);
+}
+body.theme-light .dialog-modal {
+  background-color: var(--white);
+  color: var(--black);
 }
 .dialog-modal::backdrop {
   background-color: rgba(37, 37, 37, 0.7);
@@ -249,7 +266,6 @@ body {
   font-weight: 500;
   font-size: 24px;
   line-height: 100%;
-  color: var(--white);
   text-align: center;
   margin-bottom: 25px;
 }
@@ -263,7 +279,14 @@ body {
   font-weight: 500;
   font-size: 16px;
   line-height: 100%;
-  color: var(--white);
+  color: inherit;
+}
+.modal-wrap input:focus {
+  outline: 1px solid var(--purple);
+  border: none;
+}
+body.theme-light .modal-wrap input {
+  border: 1px solid var(--purple);
 }
 .btns-wrap {
   display: flex;
@@ -296,7 +319,10 @@ body {
 .empty-text {
   font-size: 20px;
   line-height: 100%;
-  color: var(--white);
+}
+.theme-light {
+  background-color: var(--white);
+  color: var(--black);
 }
 
 @media screen and (max-width: 900px) {
