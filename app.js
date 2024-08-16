@@ -3,7 +3,8 @@ const notesList = document.querySelector('.notes-list')
 const filterLabel = document.querySelector('.filter-label')
 const filterList = document.querySelector('.filter-list')
 
-function customSelect() {
+function filterNotes() {
+  // Отработка селекта
   filterLabel.addEventListener('click', () => {
     filterList.classList.toggle('filter-list--active')
   })
@@ -15,26 +16,38 @@ function customSelect() {
       switch (filterLabel.dataset.type) {
         case 'all':
           filterLabel.firstElementChild.textContent = 'Все'
+          render(notes)
+          noNotes('У вас нет заметок')
           break
         case 'complete':
           filterLabel.firstElementChild.textContent = 'Завершенные'
+          const completedNotes = notes.filter((note) => note.completed === true)
+          render(completedNotes)
+          noNotes('Нет завершенных дел :`(')
           break
         case 'incomplete':
           filterLabel.firstElementChild.textContent = 'Незавершенные'
+          const incompletedNotes = notes.filter((note) => note.completed === false)
+          render(incompletedNotes)
+          noNotes('Все дела сделаны ; )')
           break
         default:
           filterLabel.firstElementChild.textContent = 'Все'
       }
       filterList.classList.remove('filter-list--active')
     }
+
+    // Фильтр заметок
+    // if (filterLabel.dataset.type === 'complete') {
+    //   console.log(1)
+    // }
   })
 }
-customSelect()
+filterNotes()
 
-// function filterNotes() {
-//   // if (filterLabel.dataset.type)
+// function searchNote() {
+
 // }
-// filterNotes()
 
 function interactionWithNote() {
   notesList.addEventListener('click', (event) => {
@@ -44,25 +57,29 @@ function interactionWithNote() {
       target.classList.toggle('checkbox--active')
       const index = +target.dataset.value
       notes[index].completed = !notes[index].completed
-      render()
+      render(notes)
     }
     // Удаление заметки
     if (target.classList.contains('delete-btn')) {
       const index = +target.dataset.value
       notes.splice(index, 1)
-      render()
+      render(notes)
     }
-    if (notesList.innerHTML === '') {
-      notesList.innerHTML = `
-        <li class="empty-item">
-          <img src="icons/empty.svg" alt="нет заметок">
-          <span class="empty-text">Нет заметок</span>
-        </li>
-      `
-    }
+    noNotes('У вас нет заметок')
   })
 }
 interactionWithNote()
+
+function noNotes(message) {
+  if (notesList.innerHTML === '') {
+    notesList.innerHTML = `
+      <li class="empty-item">
+        <img src="icons/empty.svg" alt="" aria-hidden="true">
+        <span class="empty-text">${message}</span>
+      </li>
+    `
+  }
+}
 
 const notes = [
   {
@@ -79,13 +96,13 @@ const notes = [
   },
 ]
 
-function render() {
+function render(notesArray) {
   notesList.innerHTML = ''
-  notes.forEach((note, i) => {
+  notesArray.forEach((note, i) => {
     notesList.insertAdjacentHTML('beforeend', toHTML(note, i))
   })
 }
-render()
+render(notes)
 
 function toHTML(note, index) {
   return `
@@ -132,7 +149,7 @@ function addNewNote() {
         completed: false,
       }
       notes.unshift(newNote)
-      render()
+      render(notes)
       inputAdd.value = ''
       dialogModal.close()
     }
